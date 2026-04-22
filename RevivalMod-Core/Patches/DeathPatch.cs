@@ -1,13 +1,15 @@
 ﻿using EFT;
+using EFT.Communications;
 using EFT.HealthSystem;
+using Fika.Core.Networking;
 using HarmonyLib;
+using RevivalMod.Features;
+using RevivalMod.Fika;
+using RevivalMod.Helpers;
 using SPT.Reflection.Patching;
 using System;
 using System.Reflection;
-using RevivalMod.Features;
-using RevivalMod.Helpers;
 using UnityEngine;
-using EFT.Communications;
 
 namespace RevivalMod.Patches
 {

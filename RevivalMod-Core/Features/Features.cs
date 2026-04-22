@@ -369,6 +369,7 @@ namespace RevivalMod.Features
                     ENotificationDurationType.Long,
                     ENotificationIconType.Default,
                     Color.green);
+
                 if (criticalStateMainTimer is not null)
                 {
                     criticalStateMainTimer.StopTimer();
@@ -653,10 +654,10 @@ namespace RevivalMod.Features
 
                 // Apply visual and movement effects
                 if (RevivalModSettings.CONTUSION_EFFECT)
-                    player.ActiveHealthController.DoContusion(RevivalModSettings.INVULNERABILITY_DURATION, 1f);
+                    player.ActiveHealthController.DoContusion(RevivalModSettings.CRITICAL_STATE_TIME, 1f);
                 
                 if (RevivalModSettings.STUN_EFFECT)
-                    player.ActiveHealthController.DoStun(RevivalModSettings.INVULNERABILITY_DURATION / 2, 1f);
+                    player.ActiveHealthController.DoStun(Math.Min(RevivalModSettings.CRITICAL_STATE_TIME, 30f), 1f);
 
                 // Severely restrict movement
                 player.Physical.WalkSpeedLimit = MOVEMENT_SPEED_MULTIPLIER;
@@ -878,13 +879,6 @@ namespace RevivalMod.Features
                     
                     healthController.RemoveNegativeEffects(EBodyPart.Common);
                 }
-
-                // Apply disorientation effects
-                if (RevivalModSettings.CONTUSION_EFFECT)
-                    healthController.DoContusion(RevivalModSettings.INVULNERABILITY_DURATION, 1f);
-                    
-                if (RevivalModSettings.STUN_EFFECT) 
-                    healthController.DoStun(RevivalModSettings.INVULNERABILITY_DURATION / 2, 1f);
 
                 Plugin.LogSource.LogInfo("Applied revival effects to player");
             }
